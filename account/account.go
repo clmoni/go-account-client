@@ -27,7 +27,7 @@ type Service struct {
 // making request to the account api
 func NewService(h *infrastructure.HTTP) *Service {
 	return &Service{
-		http: validateInjectedClientOrDefault(h),
+		http: validateInjectedHTTPOrDefault(h),
 	}
 }
 
@@ -98,7 +98,7 @@ func pageAccounts(start, stop int, accounts []models.Account) []models.Account {
 	return accounts[start:stop]
 }
 
-func validateInjectedClientOrDefault(h *infrastructure.HTTP) *infrastructure.HTTP {
+func validateInjectedHTTPOrDefault(h *infrastructure.HTTP) *infrastructure.HTTP {
 	if h == nil {
 		h = infrastructure.NewHTTP(nil, nil, nil, "")
 	}
