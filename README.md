@@ -30,7 +30,7 @@ Learning Golang & looking at various Go repositories on GitHub, I noticed people
 
 Blocking IO calls should be cancleable or timeout after a set duration. The user can choose to provide a timeout to the http client in the HTTP struct or even better provide a context with timout that has a cancelfunc that can be called with defer & executed upon exit of the calling method. A better approach with context would be to pass this context in on a per request basis (to the methods on the Service struct & passed down to the client request in HTTP where the call is made). This would mean you can cancel each request independently. 
 
-I wrote component tests that don't make real calls out, they just test that the account service and all its elements are working correctly. 
+There isn't that much logic to test so unit tests wont be as valuable here. I wrote component tests instead. These don't make real calls out, they just test that the account service and all its elements are working correctly. Also, without good test you can't refactor because you don't have any way of knowing if the code still behaves how it was intended to. In the absense of any real logic to unit test, component tests give us the same benefits.
 
 The integration tests call out to the real downtream account service, the integration tests exist to ensure that if the implementation of the downstream account API changes, it will be caught. The component tests wont catch these sort of errors since they work with mock responses from a test server.
 
